@@ -22,11 +22,13 @@ public sealed class EfOrderRepository : IOrderRepository
 
     public async Task<IReadOnlyList<Order>> GetByCustomerIdAsync(string customerId, CancellationToken cancellationToken = default)
     {
-        return await _dbContext.Orders
+        var orders = await _dbContext.Orders
             .Include(o => o.Items)
             .Where(o => o.CustomerId == customerId)
-            .OrderByDescending(o => o.CreatedAt)
             .ToListAsync(cancellationToken);
+
+        // Client-side ordering avoids database provider translation quirks with DateTimeOffset in SQLite
+        return orders.OrderByDescending(o => o.CreatedAt).ToList();
     }
 
     public async Task AddAsync(Order order, CancellationToken cancellationToken = default)

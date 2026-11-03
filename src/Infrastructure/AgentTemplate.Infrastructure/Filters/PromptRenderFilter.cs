@@ -17,6 +17,14 @@ public sealed partial class PromptRenderFilter : IPromptRenderFilter
         _logger = logger;
     }
 
+    public static string SanitizePrompt(string prompt)
+    {
+        if (string.IsNullOrEmpty(prompt))
+            return prompt;
+
+        return CreditCardRegex().Replace(prompt, "[REDACTED_CC]");
+    }
+
     public async Task OnPromptRenderAsync(
         PromptRenderContext context, 
         Func<PromptRenderContext, Task> next)
@@ -26,7 +34,7 @@ public sealed partial class PromptRenderFilter : IPromptRenderFilter
         if (!string.IsNullOrEmpty(context.RenderedPrompt))
         {
             // Sanitize sensitive patterns before dispatch to external LLM
-            var sanitized = CreditCardRegex().Replace(context.RenderedPrompt, "[REDACTED_CC]");
+            var sanitized = SanitizePrompt(context.RenderedPrompt);
             
             if (sanitized != context.RenderedPrompt)
             {

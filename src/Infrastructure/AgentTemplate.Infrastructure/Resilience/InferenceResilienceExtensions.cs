@@ -9,9 +9,11 @@ public static class InferenceResilienceExtensions
     {
         builder.AddStandardResilienceHandler(options =>
         {
-            // Extended timeouts for LLM reasoning and completions
-            options.AttemptTimeout.Timeout = TimeSpan.FromSeconds(60);
-            options.TotalRequestTimeout.Timeout = TimeSpan.FromSeconds(180);
+            // Per-attempt timeout for LLM inference calls
+            options.AttemptTimeout.Timeout = TimeSpan.FromSeconds(30);
+
+            // Cumulative timeout budget across all retries
+            options.TotalRequestTimeout.Timeout = TimeSpan.FromSeconds(120);
 
             // Jittered exponential backoff for HTTP 429 (Rate Limit) and HTTP 5xx (Inference Server Overload)
             options.Retry.MaxRetryAttempts = 3;
@@ -19,8 +21,8 @@ public static class InferenceResilienceExtensions
             options.Retry.UseJitter = true;
             options.Retry.Delay = TimeSpan.FromSeconds(2);
 
-            // Circuit breaker to protect degraded inference endpoints
-            options.CircuitBreaker.SamplingDuration = TimeSpan.FromSeconds(30);
+            // Circuit breaker sampling duration must be >= 2 * AttemptTimeout
+            options.CircuitBreaker.SamplingDuration = TimeSpan.FromSeconds(90);
             options.CircuitBreaker.FailureRatio = 0.5;
             options.CircuitBreaker.MinimumThroughput = 8;
             options.CircuitBreaker.BreakDuration = TimeSpan.FromSeconds(30);

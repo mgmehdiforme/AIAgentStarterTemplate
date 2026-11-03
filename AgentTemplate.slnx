@@ -13,4 +13,8 @@
   <Folder Name="/src/Shared/">
     <Project Path="src/Shared/AgentTemplate.ServiceDefaults/AgentTemplate.ServiceDefaults.csproj" />
   </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/AgentTemplate.Tests.Integration/AgentTemplate.Tests.Integration.csproj" />
+    <Project Path="tests/AgentTemplate.Tests.Unit/AgentTemplate.Tests.Unit.csproj" />
+  </Folder>
 </Solution>
