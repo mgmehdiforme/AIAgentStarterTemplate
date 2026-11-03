@@ -7,6 +7,9 @@
   <Folder Name="/src/Infrastructure/">
     <Project Path="src/Infrastructure/AgentTemplate.Infrastructure/AgentTemplate.Infrastructure.csproj" />
   </Folder>
+  <Folder Name="/src/Presentation/">
+    <Project Path="src/Presentation/AgentTemplate.Api/AgentTemplate.Api.csproj" />
+  </Folder>
   <Folder Name="/src/Shared/">
     <Project Path="src/Shared/AgentTemplate.ServiceDefaults/AgentTemplate.ServiceDefaults.csproj" />
   </Folder>
