@@ -1,0 +1,13 @@
+name: IntentClassification
+description: Rapid intent classification for incoming customer queries
+template_format: semantic-kernel
+template: |
+  Classify the following customer message into exactly one category:
+  - ProductSearch
+  - OrderInquiry
+  - OrderCancellation
+  - GeneralAssistance
+
+  Customer Message: {{$input}}
+
+  Category:

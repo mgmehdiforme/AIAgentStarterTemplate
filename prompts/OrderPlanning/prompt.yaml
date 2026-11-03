@@ -1,0 +1,15 @@
+name: OrderPlanning
+description: Plan creation for resolving complex multi-step order requests
+template_format: semantic-kernel
+template: |
+  Given the customer inquiry, determine the required sequence of tool actions:
+  Available actions:
+  - SearchProducts(query)
+  - GetProductBySku(sku)
+  - GetOrder(orderId)
+  - GetMyOrders()
+  - CancelOrder(orderId, reason)
+
+  User Request: {{$input}}
+
+  Execution Plan:
