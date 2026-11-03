@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/src/" />
+  <Folder Name="/src/Core/">
+    <Project Path="src/Core/AgentTemplate.Application/AgentTemplate.Application.csproj" />
+    <Project Path="src/Core/AgentTemplate.Domain/AgentTemplate.Domain.csproj" />
+  </Folder>
+  <Folder Name="/src/Shared/">
+    <Project Path="src/Shared/AgentTemplate.ServiceDefaults/AgentTemplate.ServiceDefaults.csproj" />
+  </Folder>
+</Solution>
